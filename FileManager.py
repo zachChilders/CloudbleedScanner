@@ -1,7 +1,9 @@
 import urllib.request
+import os
 import sys
 import zipfile
 
+#Download the zip file from github
 def DownloadZipFile():
     url = "https://github.com/pirate/sites-using-cloudflare/archive/master.zip"
 
@@ -27,14 +29,30 @@ def DownloadZipFile():
     f.close()
     print(": Download complete")
 
+#Unzip the file
 def ExtractList():
     zf = zipfile.ZipFile("master.zip", "r")
     zf.extract("sites-using-cloudflare-master/sorted_unique_cf.txt")
     zf.close()
 
+#Load the file into a dictionary
 def LoadLeakList():
     leaklist = open("sites-using-cloudflare-master/sorted_unique_cf.txt")
+    #Build a dictionary full of empty strings.  
     leakcache = {}
     for host in leaklist:
-        leakcache[host[:-1]] = ""
+        leakcache[host[:-1]] = "" #There's extra newlines in the file.  We delete them.  
     return leakcache
+
+#Output list of leaks.  This can be better.
+def WriteLeakList(vulnerabilityList):
+    f = open("SiteResults.txt", "w")
+    for vulnerablesite in vulnerabilityList:
+        f.write(vulnerablesite + "\n")
+    f.close()
+
+#Remove large files and archives.
+def Cleanup():
+    os.remove("master.zip")
+    os.remove("sites-using-cloudflare-master/sorted_unique_cf.txt")
+    os.rmdir("sites-using-cloudflare-master")

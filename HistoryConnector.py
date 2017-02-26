@@ -1,8 +1,9 @@
+import sys
 import os
 import re
 import sqlite3
 
-#Build location list
+#Build location list 
 #Firefox is a pain
 ffbasePath = os.getenv('APPDATA') + r"\Mozilla\Firefox\Profiles"
 for filename in os.listdir(ffbasePath):
@@ -11,6 +12,9 @@ for filename in os.listdir(ffbasePath):
 #Google made it easy on us        
 CHROME_LOCATION = os.getenv('LOCALAPPDATA') + r"Google\Chrome\User Data\Default\History"
 
+'''
+This class is used to connect to the history of various browsers.  More will be added shortly.
+'''
 class HistoryConnector():
 
     def __init__(self, browser):
@@ -26,7 +30,7 @@ class HistoryConnector():
     def __del__(self):
         self.conn.close()
 
-    def retrieveHistoryList(self):
+    def RetrieveHistoryList(self):
         # Make trigger for chrome as well
         if self.browser == "firefox":
             self.cursor.execute("SELECT host FROM moz_hosts")
