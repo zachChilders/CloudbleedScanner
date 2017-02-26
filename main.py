@@ -1,8 +1,9 @@
 #! /bin/python
+import sys
 import HistoryConnector
 
 def main():
-    h = HistoryConnector.HistoryConnector("firefox")
+    h = HistoryConnector.HistoryConnector(str(sys.argv[1]))
     historylist = h.retrieveHistoryList()
     print("Building vulnerable site cache")
     leakcache = {}

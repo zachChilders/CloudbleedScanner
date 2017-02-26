@@ -1,22 +1,27 @@
-
+import os
+import re
 import sqlite3
 
-FIREFOX_LOCATION = r"C:\Users\zwc10\AppData\Roaming\Mozilla\Firefox\Profiles\60786wyw.default\places.sqlite"
-CHROME_LOCATION = r"C:\Users\zwc10\AppData\Local\Google\Chrome\User Data\Default\History"
+#Build location list
+#Firefox is a pain
+ffbasePath = os.getenv('APPDATA') + r"\Mozilla\Firefox\Profiles"
+for filename in os.listdir(ffbasePath):
+    if re.match("[a-zA-z0-9]{1,12}.default", filename):
+        FIREFOX_LOCATION = ffbasePath + "\\" + filename + "\places.sqlite"
+#Google made it easy on us        
+CHROME_LOCATION = os.getenv('LOCALAPPDATA') + r"Google\Chrome\User Data\Default\History"
 
 class HistoryConnector():
 
     def __init__(self, browser):
         self.browser = browser
-        if browser == "chrome":
-            historylocation = CHROME_LOCATION
-        elif browser == "firefox":
+        if browser == "firefox":
             historylocation = FIREFOX_LOCATION
+        elif browser == "chrome":
+            historylocation = CHROME_LOCATION
 
         self.conn = sqlite3.connect(historylocation)
         self.cursor = self.conn.cursor()
-
-
 
     def __del__(self):
         self.conn.close()
