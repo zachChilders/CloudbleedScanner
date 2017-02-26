@@ -7,7 +7,7 @@ import sqlite3
 ffbasePath = os.getenv('APPDATA') + r"\Mozilla\Firefox\Profiles"
 for filename in os.listdir(ffbasePath):
     if re.match("[a-zA-z0-9]{1,12}.default", filename):
-        FIREFOX_LOCATION = ffbasePath + "\\" + filename + "\places.sqlite"
+        FIREFOX_LOCATION = ffbasePath + "\\" + filename + r"\places.sqlite"
 #Google made it easy on us        
 CHROME_LOCATION = os.getenv('LOCALAPPDATA') + r"Google\Chrome\User Data\Default\History"
 
