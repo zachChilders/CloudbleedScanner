@@ -3,9 +3,6 @@ import os
 import re
 import sqlite3
 
-
-
-
 '''
 This class is used to connect to the history of various browsers.  More will be added shortly.
 '''
@@ -18,14 +15,14 @@ class HistoryConnector():
         for filename in os.listdir(ffbasePath):
             if re.match("[a-zA-z0-9]{1,12}.default", filename):
                 self.FIREFOX_LOCATION = ffbasePath + "\\" + filename + r"\places.sqlite"
-        #Google made it easy on us        
-        self.CHROME_LOCATION = os.getenv('LOCALAPPDATA') + r"\Google\Chrome\User Data\Default\History"
+        #Google made it easy on us
+        self.CHROME_LOCATION = os.getenv('LOCALAPPDATA') \
+            + r"\Google\Chrome\User Data\Default\History"
 
     def __del__(self):
         self.conn.close()
 
     def RetrieveHistoryList(self):
-        
         firefox = self.retrieveFirefox()
         chrome = self.retrieveChrome()
         historylist = firefox + chrome

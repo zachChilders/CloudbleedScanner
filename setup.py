@@ -1,9 +1,11 @@
-import sys, os
-from cx_Freeze import setup, Executable
+import os
+import sys
+
+from cx_Freeze import Executable, setup
 
 options = {
         "build_exe": {
-            "include_files": [ '.\FileManager.py', '.\HistoryConnector.py', os.getenv('LOCALAPPDATA') + '\Programs\Python\Python36-32\DLLs\sqlite3.dll'],
+            "include_files": [ '.\lib\FileManager.py', '.\lib\HistoryConnector.py', os.getenv('LOCALAPPDATA') + '\Programs\Python\Python36-32\DLLs\sqlite3.dll'],
         }
     }
 

@@ -7,6 +7,6 @@ Thanks to Nick Sweetings for pulling together a comprehensive list!
 https://github.com/pirate/sites-using-cloudflare
 
 # Usage
-````python CloudBleedScanner.py {firefox | chrome}````
+````python CloudBleedScanner.py```` OR run CloudBleedScanner.exe
 
 SiteResults.txt will be created in the same directory for your further usage.
