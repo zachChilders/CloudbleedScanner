@@ -6,7 +6,7 @@ import FileManager
 
 def main():
     #Retrieve your chosen browser history, potentially will retrieve all browser histories
-    historyConn = HistoryConnector.HistoryConnector(str(sys.argv[1]))
+    historyConn = HistoryConnector.HistoryConnector()#str(sys.argv[1]).lower())
     historylist = historyConn.RetrieveHistoryList()
 
     #Obtain the latest list from github
